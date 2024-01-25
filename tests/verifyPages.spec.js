@@ -1,7 +1,10 @@
 const { test, expect } = require('@playwright/test');
 
+// URL of the page to visit 
+const targetPageUrl = 'https://magento.softwaretestingboard.com/';
+
 test('Verify access to the home page', async ({ page }) => {
-  await page.goto('https://magento.softwaretestingboard.com/');
+  await page.goto(targetPageUrl);
 
   // Wait for a short period to see the result 
   await page.waitForTimeout(2000);
@@ -19,8 +22,9 @@ test('Verify access to the home page', async ({ page }) => {
   expect(isImagePresent).not.toBeNull();
 });
 
-test('Verify "Create New Customer Account" page', async ({ page }) => {
-  await page.goto('https://magento.softwaretestingboard.com/');
+
+test('Verify access to Create New Customer Account', async ({ page }) => {
+  await page.goto(targetPageUrl);
 
   // Choose the "Create an account" button
   await page.click('body > div.page-wrapper > header > div.panel.wrapper > div > ul > li:nth-child(3) > a');
@@ -39,6 +43,19 @@ test('Verify "Create New Customer Account" page', async ({ page }) => {
  
    // Assert that the image is present
    expect(isImagePresent).not.toBeNull();
+});
+
+
+test('Verify access to Sign In', async ({ page }) => {
+await page.goto(targetPageUrl);
+
+   // Choose the "Sign in" button
+   const signInButtonSelector = 'li.authorization-link > a';
+
+   await page.click(signInButtonSelector);
+
+   // Wait for a short period to see the result 
+   await page.waitForTimeout(3000);
 });
 
 
