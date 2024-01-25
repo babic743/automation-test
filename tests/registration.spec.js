@@ -66,26 +66,21 @@ await page.type(lastName, 'Johnson');
 // Wait for a short period to see the result (optional)
 await page.waitForTimeout(2000);
 
-const email = 'input[name="email"]';
+// Every test register user with another credentials
 
-// Type the email into the input field
-await page.type(email, 'babic743@gmail.com');
+const email = `user${Math.floor(Math.random() * 10000)}@example.com`;
+const password = `Password${Math.floor(Math.random() * 10000)}`;
 
-// Wait for a short period to see the result (optional)
-await page.waitForTimeout(2000);
-
-const password = 'input[name="password"]';
-
-// Type the password into the input field
-await page.type(password, 'John12345');
+// Type the email and password into the input field 
+await page.fill('input[name="email"]', email);
+await page.fill('input[name="password"]', password);
 
 // Wait for a short period to see the result (optional)
 await page.waitForTimeout(2000);
 
-const confirmPassword = 'input[name="password_confirmation"]';
+// Type the confirm password into the input field
 
-// Type the password into the input field
-await page.type(confirmPassword, 'John12345');
+await page.fill('input[name="password_confirmation"]', password);
 
 // Wait for a short period to see the result (optional)
 await page.waitForTimeout(2000);

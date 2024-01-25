@@ -20,8 +20,54 @@ test('Verify access to the home page', async ({ page }) => {
 
   // Assert that the image is present
   expect(isImagePresent).not.toBeNull();
+
+  console.log('Access granted')
 });
 
+test('Verify headers on the home page', async ({ page }) => {
+  await page.goto(targetPageUrl);
+  
+  const firstHeader = await page.innerText('a[id="ui-id-3"] span:nth-child(1)');
+  expect(firstHeader).toBe("What's New")
+
+  const secondHeader = await page.innerText('a[id="ui-id-4"] span:nth-child(2)');
+  expect(secondHeader).toBe('Women');
+
+  const thirdHeader = await page.innerText('a[id="ui-id-5"] span:nth-child(2)');
+  expect(thirdHeader).toBe('Men');
+
+  const fourthHeader = await page.innerText('a[id="ui-id-6"] span:nth-child(2)');
+  expect(fourthHeader).toBe('Gear');
+
+  const fifthHeader = await page.innerText('a[id="ui-id-7"] span:nth-child(2)');
+  expect(fifthHeader).toBe('Training');
+
+  const sixthHeader = await page.innerText('a[id="ui-id-8"] span');
+  expect(sixthHeader).toBe('Sale');
+
+  console.log('Headers verified')
+  });
+
+  test('Verify search box', async ({ page }) => {
+    await page.goto(targetPageUrl);
+  
+    const searchButton = '#search'
+    
+    await page.click(searchButton);
+  
+    await page.type(searchButton, 'breathe');
+
+    await page.waitForTimeout(2000);
+   
+    const button = 'button[title="Search"]'
+
+    await page.click(button);
+
+    expect(await page.locator('.base').textContent()).toEqual("Search results for: 'breathe'")
+  
+     console.log('Search functionality works')
+  });
+  
 
 test('Verify access to Create New Customer Account', async ({ page }) => {
   await page.goto(targetPageUrl);
@@ -43,6 +89,8 @@ test('Verify access to Create New Customer Account', async ({ page }) => {
  
    // Assert that the image is present
    expect(isImagePresent).not.toBeNull();
+
+   console.log('Create new customer page verified')
 });
 
 
@@ -56,7 +104,11 @@ await page.goto(targetPageUrl);
 
    // Wait for a short period to see the result 
    await page.waitForTimeout(3000);
+
+   console.log('Sign in page verified')
 });
+
+
 
 
 
